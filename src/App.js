@@ -16,7 +16,7 @@ import GameOver from './components/GameOver';
 const stages = [
   {id:1, name: "start"},
   {id:2, name: "game"},
-  {id:3, name: "end"}
+  {id:3, name: "end"},
 ];
 
 //Quantidade de tentativas
@@ -54,7 +54,7 @@ function App() {
 
     //cria o array de letras
     let wordLetters = word.split("");
-    wordLetters = wordLetters.map((l)=>(l.toLowerCase()));
+    wordLetters = wordLetters.map((l)=>l.toLowerCase());
 
     //Setar os estados (states)
     setPickedCategory(category);
@@ -78,14 +78,15 @@ function App() {
       setGuesses((actualGuesses)=>actualGuesses -1);
     }
   };
+
   const clearLetterStates = ()=>{
     setGuessedLetters([]);
-    setWrongLetters([])
+    setWrongLetters([]);
   };
 
   // Monitorar as tentativas usando useEffect
   useEffect(()=>{
-    if(guesses<=0){
+    if(guesses===0){
       //resetar todos os estados das letras
       clearLetterStates();
       setGameStage(stages[2].name);
@@ -96,15 +97,16 @@ function App() {
   useEffect(()=>{
     //Cria um vetor de letras únicas
     const uniqueLetters=[...new Set(letters)];
+    console.log(uniqueLetters);
+    console.log(guessedLetters);
     //condição de vitória
-    if(guessedLetters.length === uniqueLetters.length){
+    if(guessedLetters.length>0 && guessedLetters.length === uniqueLetters.length){
       //adicionar score
       setScore((actualScore)=> actualScore+=100);
       //reinicar jogo com nova palavra
       startGame();
     }
   },[guessedLetters,letters,startGame]
-
 );
 
   //Reinicia o jogo na tela de Fim de jogo

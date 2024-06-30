@@ -11,7 +11,6 @@ const Game = ({verifyLetter, pickedWord,pickedCategory,letters,guessedLetters,wr
         setLetter('');
         letterInputRef.current.focus();
     }   
-
     return(
         <div className='game'>
             <p className="points">
@@ -39,11 +38,10 @@ const Game = ({verifyLetter, pickedWord,pickedCategory,letters,guessedLetters,wr
                 </form>
             </div>
             <div className="wrongLetterContainer">
-                <p>Letras já utilizadas:</p>
+                <p>Letras erradas:</p>
                 {wrongLetters.map((letters,i)=><span key={i}>{letters}, </span>)}
             </div>
         </div>
-       
     );
 }
 
